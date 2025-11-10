@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="{% url 'app:index' %}">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -28,12 +28,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'product_list' %}">All Products</a></li>
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                {% comment %} <li><a class="dropdown-item" href="#!">Popular Items</a></li> {% endcomment %}
-                                {% for category in categories %}
-                                    <li><a class="dropdown-item" href="{% url 'product_list' %}?category={{ category.id }}">{{ category.name }}</a></li>
-                                {% endfor %}
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -54,17 +52,17 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.image.url }}" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">'{{ product.rating }}' </div>
+                        <div class="small mb-1"></div>
                         <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
                         <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through">${{ product.old_price }}</span>
-                            <span>${{ product.new_price }}</span>
+                            <span class="text-decoration-line-through">${{ product.price }}</span>
+                            <span>${{ product.discounted_price }}</span>
                         </div>
-                        <p class="lead">'{{ product.description }}'</p>
+                        <p class="lead">{{ product.description }}</p>
                         <div class="d-flex">
                             <form>
                                 <div class="form-group">
-                                    <h2>'{{ product.name }}'</h2>
+                                    <h2>Place an order</h2>
                                 </div>
                                 <div class="form-group mb-3">
                                   <label for="formGroupExampleInput">Your name</label>
@@ -128,7 +126,7 @@
                     
                     <form>
                         <div class="form-group mb-3">
-                          <label for="formGroupExampleInput"></label>
+                          <label for="formGroupExampleInput">Your name</label>
                           <input type="text" class="form-control"  placeholder="Your name">
                         </div>
                         <div class="form-group mb-3">
@@ -263,6 +261,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="{% static 'app/js/scripts.js' %}"></script>
     </body>
 </html>

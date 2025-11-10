@@ -12,11 +12,12 @@
 
 
 from django.urls import path, include
-from . import views
+from .views import index, detail
+
 
 app_name = 'app'  # ← this must match 'app' in 'app:index'
 
 urlpatterns = [
-    path('', views.index, name='index')
-    
+    path('', index, name='index'),
+    path('detail<int:product_id>/', detail, name='detail'),
 ]
