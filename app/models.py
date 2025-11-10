@@ -37,7 +37,8 @@ class Product(BaseModel):
     @property
     def discounted_price(self):
         if self.discount:
-            return self.price * Decimal((100 - self.discount) / 100)
+            discount_amount = (self.discount / Decimal(100)) * self.price
+            return self.price - discount_amount
 
         return self.price
     
