@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="{% url 'app:index' %}">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -33,7 +33,7 @@
                                 <li><hr class="dropdown-divider" /></li>
                                     {% for category in categories %}
                                 {% comment %} <li><a class="dropdown-item" href="#!">Popular Items</a></li> {% endcomment %}
-                                        <li><a class="dropdown-item" href="#!">{{ category.title }}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'app:category' category.id %}">{{ category.title }}</a></li>
                                     {% endfor %}
                             </ul>
                         </li>
@@ -108,7 +108,9 @@
                         <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
+                            {% if product.description %}
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ product.get_sale_badge }}</div>
+                            {% endif %}
                             <!-- Product image-->
                             <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
                             <!-- Product details-->
@@ -125,8 +127,13 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">${{ product.price}}</span>
-                                    ${{ product.discounted_price}}
+                                    {% if product.description %}
+                                        <span class="text-muted text-decoration-line-through">${{ product.price}}</span>
+                                        ${{ product.discounted_price }}
+                                
+                                    {% else %}
+                                        ${{ product.price }}
+                                    {% endif %}
                                 </div>
                             </div>
                             <!-- Product actions-->

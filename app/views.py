@@ -5,9 +5,16 @@ from django.http import JsonResponse,Http404
 
 # Create your views here.
 
-def index(request):
+def index(request, category_id = None):
     categories = Category.objects.all()
-    products = Product.objects.all()
+    
+    if category_id is None:
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(category_id=category_id)
+        
+        
+    
     context = {
         'categories': categories,
         'products': products

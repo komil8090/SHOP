@@ -19,5 +19,11 @@ app_name = 'app'  # ← this must match 'app' in 'app:index'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('detail<int:product_id>/', detail, name='detail'),
+    path('category/<int:category_id>/', index, name='category'),
+    path('detail/<int:product_id>/', detail, name='detail'),
+    
 ]
+
+
+
+
