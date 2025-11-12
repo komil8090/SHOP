@@ -1,0 +1,99 @@
+
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f5f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    width: 450px;
+    transition: all 0.3s ease;
+}
+
+.form-container:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+select {
+    padding: 0.7rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    background: #fafafa;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #5a8dee;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(90, 141, 238, 0.15);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.save-btn,
+.cancel-btn {
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.save-btn {
+    background-color: #5a8dee;
+    color: #fff;
+}
+
+.save-btn:hover {
+    background-color: #4778d0;
+}
+
+.cancel-btn {
+    background-color: #e5e5e5;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #d1d1d1;
+}
