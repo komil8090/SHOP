@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+    <link rel="stylesheet" href="{% static 'app/css/comment.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Comments</h2>
+
+        <!-- Comment Form -->
+        <form method="post" class="comment-form">
+            {% csrf_token %}
+
+            <label for="id_name">Name</label>
+            {{ form.name }}
+
+            <label for="id_text">Comment</label>
+            {{ form.text }}
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+
+        <hr>
+
+        <!-- Comment List -->
+        <div class="comment-box">
+            {% for c in comments %}
+                <div class="comment">
+                    <div class="c-header">
+                        <strong>{{ c.name }}</strong>
+                        <span>{{ c.created_at|date:"Y-m-d H:i" }}</span>
+                    </div>
+
+                    <p>{{ c.text }}</p>
+                </div>
+            {% empty %}
+                <p>No comments yet...</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>

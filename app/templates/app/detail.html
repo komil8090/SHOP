@@ -60,6 +60,7 @@
             </div>
         </section>
 
+        
         <div class="container mt-4 mb-4">
             <div class="row">
                 <div class="col-12">
@@ -67,10 +68,11 @@
                         <h2>Latest comments</h2>
                     </div>
 
+                    {% for c in comments %}
                     <div class="media card p-4 mt-2">
                         <div class="media-body">
-                          <h3 class="mt-0">John Doe</h3>
-                          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                          <h3 class="mt-0">{{ c.name }}</h3>
+                          <p>{{ c.text }}</p>
                         </div>
                     </div>
 
@@ -88,7 +90,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> 
 
                 <div class="col-8 offset-2 mt-5">
                    
@@ -98,6 +100,7 @@
                         </div>
                     
                     <form>
+                        
                         <div class="form-group mb-3">
                           <label for="formGroupExampleInput">Your name</label>
                           <input type="text" class="form-control"  placeholder="Your name">
@@ -109,13 +112,14 @@
 
                         <div class="form-group mb-3">
                             <label for="formGroupExampleInput2">Your comment</label>
-                           <textarea name="" class="form-control" id="" cols="30" rows="10"></textarea>
+                           <textarea name="text" class="form-control" id="comment" cols="30" rows="10"></textarea>
                           </div>
 
                           <div class="form-group mb-3">
                            
                             <input type="text" class="btn btn-success" value="Send">
                           </div>
+                          {% endfor %}
                       </form>
 
                     </div>

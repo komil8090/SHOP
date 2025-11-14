@@ -111,3 +111,28 @@ class Product(BaseModel):
 # smartfonlar = Category()
 
 # smartfonlar.products.all()
+
+
+
+class Order(BaseModel):
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=30)
+    quantity = models.PositiveIntegerField(default=1)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    
+    
+    def __str__(self):
+        return f'{self.name} : {self.phone}'
+    
+    
+
+
+class Comment(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+    

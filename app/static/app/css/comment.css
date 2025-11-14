@@ -1,0 +1,94 @@
+/* === Neo Light Comments Style === */
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f5f6fa;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.container {
+    background: #fff;
+    width: 550px;
+    padding: 2rem;
+    border-radius: 1.7rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+label {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: #fafafa;
+    border-radius: 1rem;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    outline: none;
+    font-size: 1rem;
+    transition: .2s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #5a8dee;
+    box-shadow: 0 0 0 3px rgba(90,141,238,0.15);
+    background: #fff;
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    background: #5a8dee;
+    color: white;
+    padding: 0.8rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: #4778d0;
+}
+
+.comment-box {
+    margin-top: 2rem;
+}
+
+.comment {
+    background: #f9f9ff;
+    padding: 1rem;
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #5a8dee;
+}
+
+.c-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.c-header strong {
+    color: #333;
+}
+
+.c-header span {
+    color: #777;
+    font-size: 0.85rem;
+}

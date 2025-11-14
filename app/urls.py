@@ -27,7 +27,8 @@
 
 
 from django.urls import path,include
-from .views import index,detail,create_product,delete_product,update_product
+from .views import create_order, index, detail, create_product, delete_product, update_product, comment_list
+
 
 
 app_name = 'app'
@@ -39,5 +40,8 @@ urlpatterns = [
     path('create/',create_product,name='create'),
     path('delete/<int:pk>',delete_product,name='delete'),
     path("edit/<int:product_id>/",update_product, name="update"),
+    path('detail/<int:pk>/orders/',create_order,name='create_order'),
+    path('comments/', comment_list, name='comment_list'),
 ]
+
 
