@@ -36,12 +36,12 @@ app_name = 'app'
 urlpatterns = [
     path('',index,name='index'),
     path('category/<int:category_id>',index,name='products_of_category'),
-    path('detail/<product_id>',detail,name='detail'),
+    path('product/<int:pk>/', detail, name='detail'),
     path('create/',create_product,name='create'),
     path('delete/<int:pk>',delete_product,name='delete'),
     path("edit/<int:product_id>/",update_product, name="update"),
     path('detail/<int:pk>/orders/',create_order,name='create_order'),
-    path('comments/', comment_list, name='comment_list'),
+    path('product/<int:pk>/', detail, name='detail'),
 ]
 
 

@@ -128,11 +128,14 @@ class Order(BaseModel):
 
 
 class Comment(models.Model):
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='comments')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=100)
+    email = models.EmailField()
     text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ['-created_at']
+    def __str__(self):
+        return self.name  
+    
+      
     

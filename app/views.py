@@ -32,8 +32,8 @@ def index(request,category_id = None):
 
 
 
-def detail(request,product_id):
-    product = Product.objects.get(id = product_id)
+def detail(request,pk):
+    product = Product.objects.get(id = pk)
     if not product:
         return JsonResponse(data={'message':'Oops. Page Not Found','status_code':404})
     
