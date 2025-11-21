@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'import_export',
+    'adminsortable2',
 ]
 
 MIDDLEWARE = [

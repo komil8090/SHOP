@@ -1,9 +1,7 @@
-
-
-from django.shortcuts import render ,redirect,get_object_or_404
-from .models import Category , Product , Comment
+from django.shortcuts import render ,redirect
+from .models import Category , Product, Comment
 from django.http import JsonResponse
-from app.forms import ProductModelForm, ProductForm,OrderModelForm,CommentForm
+from app.forms import ProductModelForm,OrderModelForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -13,8 +11,9 @@ from app.utils import filter_by_price
 
 # Create your views here.
 
-
 def index(request,category_id = None):
+    search_query = request.GET.get('q','')
+    filter_type = request.GET.get('filter_type','')
     
     categories = Category.objects.all()
     
@@ -22,6 +21,12 @@ def index(request,category_id = None):
         products = Product.objects.filter(category = category_id)
     else:
         products = Product.objects.all()
+        
+    if search_query:
+        products = products.filter(Q(name__icontains = search_query) | Q(description__icontains=search_query))
+
+    products = filter_by_price(filter_type,products)
+    
     
     
     context = {
@@ -32,13 +37,15 @@ def index(request,category_id = None):
 
 
 
-def detail(request,pk):
-    product = Product.objects.get(id = pk)
+def detail(request,product_id):
+    product = Product.objects.get(id = product_id)
+    comments = product.comments.filter(is_handle=False)
     if not product:
         return JsonResponse(data={'message':'Oops. Page Not Found','status_code':404})
     
     context = {
-        'product' : product
+        'product' : product,
+        'comments':comments
     }
     return render(request,'app/detail.html',context)
 
@@ -82,18 +89,24 @@ def delete_product(request,pk):
 
 
 
-def update_product(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES, instance=product)
+def update_product(request,pk):
+    product = get_object_or_404(Product,pk=pk)
+    if request.method == 'POST':
+        form = ProductModelForm(request.POST,request.FILES,instance=product)
+
         if form.is_valid():
             form.save()
-            return redirect("app:detail", product_id=product.id)
+            return redirect('app:detail',pk)
     else:
-        form = ProductForm(instance=product)
+        form = ProductModelForm(instance=product)
+        
+    context = {
+        'form':form,
+        'product':product
+    }
+    return render(request,'app/update.html',context)
 
-    return render(request, "app/edit_product.html", {"form": form, "product": product})
+
 
 
 def create_order(request,pk):
@@ -122,7 +135,7 @@ def create_order(request,pk):
                     messages.ERROR,
                     'Order successfully sent✅'
                 ) 
-                return redirect('app:detail',product_id=product.id)
+                return redirect('app:detail',pk)
     else:
         form = OrderModelForm()
 
@@ -134,17 +147,22 @@ def create_order(request,pk):
     return render(request,'app/detail.html',context)
 
 
-def comment_list(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    comments = product.comments.all()
+# Product.objects.create()
+
+
+def create_comment(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
 
     if request.method == "POST":
-        name = request.POST.get("name")
         text = request.POST.get("text")
-        Comment.objects.create(product=product, name=name, text=text)
-        return redirect('app:detail', pk=pk)
 
-    return render(request, 'app/detail.html', {
-        'product': product,
-        'comments': comments
-    })
+        if text:
+            Comment.objects.create(
+                product=product,
+                user=request.user,
+                text=text
+            )
+
+        return redirect("product_detail", product_id=product.id)
+
+    return redirect("product_detail", product_id=product.id)
