@@ -32,6 +32,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTH_USER_MODEL = 'user.CustomUser'
+
+
+
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'import_export',
     'adminsortable2',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
